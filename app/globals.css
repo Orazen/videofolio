@@ -1,0 +1,211 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0a0a0a;
+  --bg-soft: #141414;
+  --fg: #f5f5f5;
+  --muted: #8a8a8a;
+  --line: #1f1f1f;
+  --accent: #e7fe55;
+  /* Accent as TEXT. Same lime on dark; a deep olive on light, where lime text is unreadable. */
+  --accent-ink: #e7fe55;
+  --accent-2: #ff2d2d;
+  color-scheme: dark;
+}
+
+/* Light theme — set by the toggle / prefers-color-scheme (see app/layout.tsx). */
+:root[data-theme="light"] {
+  --bg: #fafafa;
+  --bg-soft: #f0f0f0;
+  --fg: #0a0a0a;
+  --muted: #666666;
+  --line: #e2e2e2;
+  --accent: #e7fe55;
+  --accent-ink: #4f5e00;
+  --accent-2: #e5202a;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-soft: var(--bg-soft);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  /* clip, not hidden: hidden turns <body> into a scroll container and breaks position: sticky */
+  overflow-x: clip;
+}
+
+body {
+  cursor: none;
+}
+body a,
+body button,
+body input,
+body select,
+body textarea,
+body label {
+  cursor: none;
+}
+@media (max-width: 768px), (pointer: coarse) {
+  body,
+  body a,
+  body button,
+  body input,
+  body select,
+  body textarea,
+  body label {
+    cursor: auto;
+  }
+  .cursor-el {
+    display: none;
+  }
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 2px;
+}
+
+/* Text in the accent reads from --accent-ink so it stays legible on the light theme. */
+@utility text-accent {
+  color: var(--accent-ink);
+}
+
+/* Smooth hand-off when the theme flips (skipped for reduced motion below). */
+html.theme-switching,
+html.theme-switching * {
+  transition:
+    background-color 300ms ease,
+    color 300ms ease,
+    border-color 300ms ease !important;
+}
+
+html {
+  scrollbar-width: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Marquee */
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+.marquee-track {
+  animation: marquee var(--marquee-duration, 40s) linear infinite;
+  animation-direction: var(--marquee-direction, normal);
+}
+/* Hovering any word pauses the loop */
+.marquee:has(.marquee-word:hover) .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Animated placeholder gradient for vertical video stand-ins */
+@keyframes gradient-drift {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+.anim-gradient {
+  background-size: 220% 220%;
+  animation: gradient-drift 9s ease-in-out infinite;
+}
+
+/* Tiny "↓" nudge beside the hero availability pill */
+@keyframes nudge {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(2px);
+  }
+}
+.anim-nudge {
+  display: inline-block;
+  animation: nudge 2s ease-in-out infinite;
+}
+
+/* Wordmark: a 150ms REC-style flicker once every 8s, and a skew "nod" on hover */
+@keyframes flicker {
+  0%,
+  98.1% {
+    opacity: 1;
+  }
+  99.05% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes nod {
+  0%,
+  100% {
+    transform: skewX(0deg);
+  }
+  50% {
+    transform: skewX(-3deg);
+  }
+}
+.wordmark {
+  animation: flicker 8s linear infinite;
+}
+.wordmark:hover {
+  animation: nod 200ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .anim-gradient,
+  .anim-nudge,
+  .wordmark {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
