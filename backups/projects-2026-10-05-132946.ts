@@ -37,27 +37,7 @@ export function projectCredits(p: Pick<Project, "filmed" | "directed" | "edited"
   return { filmed: Boolean(p.filmed), directed: Boolean(p.directed), edited: p.edited !== false };
 }
 
-export const projects: Project[] = [
-  {
-    id: "be-happy",
-    accentColor: "#e7fe55",
-    orientation: "vertical",
-    title: "Be happy",
-    category: "sports",
-    year: 2026,
-    client: "myself",
-    role: "Editor",
-    tools: [],
-    duration: "00:30",
-    description: "",
-    videoUrl: "",
-    thumbnail: "",
-    filmed: true,
-    directed: true,
-    edited: true,
-    createdAt: "2026-10-05T13:29:46.642Z",
-  },
-];
+export const projects: Project[] = [];
 
 export type Reel = {
   id: string;
