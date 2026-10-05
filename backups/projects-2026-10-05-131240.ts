@@ -49,7 +49,7 @@ export const projects: Project[] = [
     role: "AI Director, Editor",
     tools: ["HIGGSFIELD"],
     duration: "01:02",
-    description: "write-test",
+    description: "",
     videoUrl: "",
     thumbnail: "",
     featured: true,
@@ -57,7 +57,10 @@ export const projects: Project[] = [
     directed: true,
     edited: true,
     tags: ["tag", "video"],
+    thumbnailSource: "auto",
   },
+
+
   {
     id: "project-02",
     accentColor: "#e7fe55",
@@ -76,8 +79,11 @@ export const projects: Project[] = [
     filmed: false,
     directed: true,
     edited: true,
+    thumbnailSource: "auto",
     createdAt: "2026-09-30T15:48:04.982Z",
   },
+
+
   {
     id: "project-03",
     accentColor: "#e7fe55",
@@ -95,8 +101,11 @@ export const projects: Project[] = [
     filmed: false,
     directed: true,
     edited: true,
+    thumbnailSource: "auto",
     createdAt: "2026-10-02T01:33:46.163Z",
   },
+
+
   {
     id: "project-04",
     accentColor: "#e7fe55",
@@ -115,7 +124,10 @@ export const projects: Project[] = [
     filmed: true,
     directed: true,
     edited: true,
+    thumbnailSource: "auto",
   },
+
+
   {
     id: "project-05",
     accentColor: "#e7fe55",
@@ -135,8 +147,11 @@ export const projects: Project[] = [
     directed: false,
     edited: true,
     tags: ["tag", "video"],
+    thumbnailSource: "auto",
     createdAt: "2026-09-30T14:40:16.046Z",
   },
+
+
   {
     id: "project-06",
     accentColor: "#e7fe55",
@@ -156,6 +171,8 @@ export const projects: Project[] = [
     directed: false,
     edited: true,
   },
+
+
   {
     id: "project-07",
     accentColor: "#e7fe55",
@@ -172,6 +189,8 @@ export const projects: Project[] = [
     thumbnail: "",
     featured: true,
   },
+
+
   {
     id: "project-08",
     accentColor: "#e7fe55",
@@ -189,8 +208,11 @@ export const projects: Project[] = [
     filmed: false,
     directed: false,
     edited: true,
+    thumbnailSource: "auto",
     createdAt: "2026-10-02T01:40:48.063Z",
   },
+
+
   {
     id: "project-09",
     accentColor: "#e7fe55",
@@ -209,8 +231,10 @@ export const projects: Project[] = [
     directed: true,
     edited: true,
     tags: ["tag", "video"],
+    thumbnailSource: "auto",
     createdAt: "2026-10-02T01:41:14.030Z",
   },
+
 ];
 
 export type Reel = {
