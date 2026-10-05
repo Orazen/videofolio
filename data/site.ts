@@ -37,6 +37,34 @@ export const roles = [
   { label: "Reel Maker", icon: "✧" },
 ];
 
+/**
+ * Career stats shown on /about.
+ *
+ * These ship empty on purpose. Never publish a number you can't back up —
+ * leave `value` blank and that tile is hidden rather than showing a
+ * placeholder. Fill in real figures for your own career.
+ */
+export const stats = [
+  { value: "", label: "Views" },
+  { value: "", label: "Clients" },
+  { value: "", label: "Years" },
+];
+
+/**
+ * Career timeline on /about, oldest first. Empty array hides the section
+ * entirely. Only list milestones that actually happened to you.
+ */
+export const timeline: { year: string; text: string }[] = [];
+
+/** Services list on /about. */
+export const services = [
+  { title: "Editing", text: "Story-first offline and online edits for film, broadcast and social." },
+  { title: "Color", text: "Grading in DaVinci Resolve — from natural to heavily stylised looks." },
+  { title: "Motion", text: "Titles, typography and graphics in After Effects." },
+  { title: "Content", text: "Concept-to-delivery social content packages, vertical-first." },
+  { title: "AI Direction", text: "Generative sequences directed, curated and finished like live action." },
+];
+
 /** Starter tool list for the About page marquee — swap for your own. */
 export const tools = [
   "Premiere Pro",

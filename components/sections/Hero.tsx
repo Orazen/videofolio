@@ -168,8 +168,8 @@ export default function Hero() {
             {...fadeUp(lettersDone)}
             className="mt-8 max-w-2xl text-xl leading-snug text-fg/80 md:text-[28px]"
           >
-            Senior Video Editor &amp; Content Creator — 9+ years cutting brand films,
-            commercials, social reels, and AI-driven visuals.
+            Senior Video Editor &amp; Content Creator — cutting brand films, commercials,
+            social reels, and AI-driven visuals.
           </motion.p>
 
           <motion.div
