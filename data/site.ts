@@ -12,6 +12,7 @@ export const site = {
 /** Replace each href with your real profile URL, or delete the entry. */
 export const socials = [
   { label: "Instagram", href: "https://www.instagram.com/vijaycharan_04/" },
+  { label: "Visual Cinema", href: "https://www.instagram.com/visual_cinema.4x/" },
   { label: "Vimeo", href: "#" },
   { label: "Behance", href: "#" },
   { label: "YouTube", href: "#" },
