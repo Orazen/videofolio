@@ -3,7 +3,7 @@
  * Everything brand-related lives here so a fork only needs one file changed.
  */
 export const site = {
-  name: "Your Name",
+  name: "Vijay Charan",
   email: "hello@example.com",
   location: "Your City",
   role: "Video Editor & Content Creator",
@@ -11,7 +11,7 @@ export const site = {
 
 /** Replace each href with your real profile URL, or delete the entry. */
 export const socials = [
-  { label: "Instagram", href: "#" },
+  { label: "Instagram", href: "https://www.instagram.com/vijaycharan_04/" },
   { label: "Vimeo", href: "#" },
   { label: "Behance", href: "#" },
   { label: "YouTube", href: "#" },

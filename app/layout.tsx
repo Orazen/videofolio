@@ -34,11 +34,14 @@ const jetbrains = JetBrains_Mono({
 const description =
   "A senior video editor and content creator cutting brand films, commercials, social reels and AI-driven visuals.";
 
+/** Derived from `site.name` so editing data/site.ts updates every SEO surface. */
+const pageTitle = `${site.name} — Video Editor & Content Creator`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Your Name — Video Editor & Content Creator",
-    template: "%s — Your Name",
+    default: pageTitle,
+    template: `%s — ${site.name}`,
   },
   description,
   applicationName: site.name,
@@ -51,12 +54,12 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: site.name,
-    title: "Your Name — Video Editor & Content Creator",
+    title: pageTitle,
     description,
     url: "/",
     locale: "en_US",
   },
-  twitter: { card: "summary_large_image", title: "Your Name — Video Editor & Content Creator", description },
+  twitter: { card: "summary_large_image", title: pageTitle, description },
   appleWebApp: { capable: true, title: site.name, statusBarStyle: "black-translucent" },
   formatDetection: { telephone: false },
 };
