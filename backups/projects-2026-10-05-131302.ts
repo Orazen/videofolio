@@ -49,7 +49,7 @@ export const projects: Project[] = [
     role: "AI Director, Editor",
     tools: ["HIGGSFIELD"],
     duration: "01:02",
-    description: "",
+    description: "write-test",
     videoUrl: "",
     thumbnail: "",
     featured: true,
