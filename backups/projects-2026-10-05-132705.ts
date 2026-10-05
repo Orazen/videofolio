@@ -211,25 +211,6 @@ export const projects: Project[] = [
     tags: ["tag", "video"],
     createdAt: "2026-10-02T01:41:14.030Z",
   },
-  {
-    id: "reel-1",
-    accentColor: "#e7fe55",
-    orientation: "vertical",
-    title: "Reel 1",
-    category: "reels",
-    year: 2026,
-    client: "Myself",
-    role: "Editor",
-    tools: [],
-    duration: "00:23",
-    description: "",
-    videoUrl: "",
-    thumbnail: "",
-    filmed: true,
-    directed: false,
-    edited: true,
-    createdAt: "2026-10-05T13:27:04.962Z",
-  },
 ];
 
 export type Reel = {
