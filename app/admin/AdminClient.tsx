@@ -383,7 +383,8 @@ function Admin({ initialParams }: { initialParams: Record<string, string> }) {
 
   const logout = () => {
     clearStoredKey();
-    window.location.replace("/");
+    // Back to /admin (not "/") so the key form is what you land on.
+    window.location.replace("/admin");
   };
 
   if (status.kind === "denied") {
