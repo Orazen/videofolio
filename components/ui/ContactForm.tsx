@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState, type FormEvent } from "react";
-import { site } from "@/data/site";
+import { contactEmail } from "@/data/site";
 import { trackCTA } from "@/lib/analytics";
 import { cn, EASE_OUT } from "@/lib/utils";
 
@@ -53,10 +53,10 @@ export default function ContactForm() {
       if (!res.ok || !data.ok) throw new Error(data.error || `Something went wrong (${res.status})`);
       trackCTA("contact_submit");
       setForm(EMPTY);
-      setToast({ kind: "success", text: "Message sent — I'll be in touch within 24 hours." });
+      setToast({ kind: "success", text: "Message sent — I'll be in touch as soon as I can." });
     } catch (err) {
       const reason = err instanceof Error ? err.message : "Something went wrong";
-      setToast({ kind: "error", text: `${reason}. You can also email ${site.email}.` });
+      setToast({ kind: "error", text: contactEmail ? `${reason}. You can also email ${contactEmail}.` : `${reason}. Please use the social links to reach out.` });
     } finally {
       setSending(false);
     }

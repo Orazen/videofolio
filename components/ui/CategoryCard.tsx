@@ -3,9 +3,9 @@ import type { Category } from "@/data/categories";
 import { cn, pad } from "@/lib/utils";
 
 const GRADIENTS = [
-  "linear-gradient(160deg, #262626, #0e0e0e 40%, #1c1c1c 70%, #0a0a0a)",
-  "linear-gradient(200deg, #0e0e0e, #242424 45%, #0b0b0b 75%, #1a1a1a)",
-  "linear-gradient(140deg, #1e1e1e, #0b0b0b 35%, #262626 65%, #0e0e0e)",
+  "linear-gradient(160deg, #292927, #121211 40%, #1b1b19 70%, #121211)",
+  "linear-gradient(200deg, #121211, #292927 45%, #121211 75%, #1b1b19)",
+  "linear-gradient(140deg, #252523, #121211 35%, #292927 65%, #1b1b19)",
 ];
 
 // Hover-only "[ ● … ]" markers: zero-width at rest so the count stays flush left.

@@ -39,6 +39,13 @@ function subscribeScrolling(onChange: () => void) {
 }
 const getScrolling = () => scrolling;
 
+const homeAnchors: Record<(typeof navLinks)[number]["href"], string> = {
+  "/work": "#work",
+  "/reels": "#reels",
+  "/about": "#about",
+  "/contact": "#contact",
+};
+
 export default function Navigation() {
   const pathname = usePathname();
   const scrolled = useSyncExternalStore(subscribeScroll, getScrolled, getScrolledServer);
@@ -71,7 +78,7 @@ export default function Navigation() {
             : "border-transparent bg-transparent",
         )}
       >
-        <nav className="mx-auto grid h-16 w-full max-w-[1600px] grid-cols-2 items-center px-6 md:grid-cols-3 md:px-12 lg:px-20">
+        <nav className="mx-auto grid h-16 w-full max-w-[1600px] grid-cols-2 items-center px-6 md:grid-cols-[1fr_auto_1fr] md:px-12 lg:px-20">
           <Link
             href="/"
             onClick={() => setMenuOpen(false)}
@@ -79,7 +86,6 @@ export default function Navigation() {
           >
             <span>
               {site.name}
-              <sup className="ml-0.5 font-mono text-[8px] font-normal text-muted">™</sup>
             </span>
             <span
               aria-hidden
@@ -92,7 +98,8 @@ export default function Navigation() {
 
           <ul className="hidden items-center justify-center gap-8 md:flex">
             {navLinks.map((link) => {
-              const active = isActive(link.href);
+              const href = pathname === "/" ? homeAnchors[link.href] : link.href;
+              const active = href.startsWith("/") && isActive(link.href);
               return (
                 <li key={link.href} className="relative">
                   {active && (
@@ -102,7 +109,7 @@ export default function Navigation() {
                     />
                   )}
                   <Link
-                    href={link.href}
+                    href={href}
                     className={cn(
                       "font-mono text-[11px] uppercase tracking-widest transition-colors duration-300",
                       active ? "text-fg" : "text-muted hover:text-fg",
@@ -122,13 +129,14 @@ export default function Navigation() {
             })}
           </ul>
 
-          <div className="hidden items-center justify-end gap-4 font-mono text-[10px] uppercase tracking-widest text-muted md:flex">
+          <div className="hidden items-center justify-end gap-5 md:flex">
             <NavTools />
-            <Clock className="tabular-nums" />
-            <span className="flex items-center gap-1.5">
-              <span className="size-1.5 rounded-full bg-accent-2" />
-              {site.location}
-            </span>
+            <Link
+              href={pathname === "/" ? "#contact" : "/contact"}
+              className="rounded-full bg-accent px-4 py-2 font-mono text-[10px] font-bold uppercase tracking-widest text-bg transition-transform hover:-translate-y-0.5"
+            >
+              Hire me ↗
+            </Link>
           </div>
 
           <div className="flex items-center gap-3 justify-self-end md:hidden">
@@ -157,25 +165,28 @@ export default function Navigation() {
             className="fixed inset-0 z-40 flex flex-col justify-between bg-bg px-6 pb-10 pt-28 md:hidden"
           >
             <ul className="flex flex-col gap-2">
-              {navLinks.map((link, i) => (
-                <motion.li
-                  key={link.href}
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.05 + i * 0.06, ease: EASE_OUT }}
-                >
-                  <Link
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    className={cn(
-                      "text-5xl font-black uppercase tracking-tight",
-                      isActive(link.href) ? "text-accent" : "text-fg",
-                    )}
+              {navLinks.map((link, i) => {
+                const href = pathname === "/" ? homeAnchors[link.href] : link.href;
+                return (
+                  <motion.li
+                    key={link.href}
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.05 + i * 0.06, ease: EASE_OUT }}
                   >
-                    {link.label}
-                  </Link>
-                </motion.li>
-              ))}
+                    <Link
+                      href={href}
+                      onClick={() => setMenuOpen(false)}
+                      className={cn(
+                        "text-5xl font-black uppercase tracking-tight",
+                        isActive(link.href) ? "text-accent" : "text-fg",
+                      )}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.li>
+                );
+              })}
             </ul>
             <div className="flex justify-between font-mono text-[10px] uppercase tracking-widest text-muted">
               <Clock className="tabular-nums" />

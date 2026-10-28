@@ -1,5 +1,5 @@
 import { Resend } from "resend";
-import { site } from "@/data/site";
+import { contactEmail, site } from "@/data/site";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -26,6 +26,8 @@ function fail(error: string, status: number) {
 
 /** POST { name, email, message, projectType? } → { ok: true } | { ok: false, error } */
 export async function POST(request: Request) {
+  if (!contactEmail) return fail("Contact email is not configured", 503);
+
   let body: Record<string, unknown>;
   try {
     const parsed: unknown = await request.json();
@@ -69,7 +71,7 @@ export async function POST(request: Request) {
     const resend = new Resend(apiKey);
     const { error } = await resend.emails.send({
       from: `${site.name} Portfolio <onboarding@resend.dev>`,
-      to: site.email,
+      to: contactEmail,
       replyTo: email,
       subject: `New enquiry from ${name}${projectType ? ` — ${projectType}` : ""}`,
       text: `Name: ${name}\nEmail: ${email}\nProject type: ${projectType || "—"}\n\n${message}`,

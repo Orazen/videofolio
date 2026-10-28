@@ -1,7 +1,7 @@
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter_Tight, JetBrains_Mono } from "next/font/google";
 import AnalyticsListener from "@/components/ui/AnalyticsListener";
 import CommandPalette from "@/components/ui/CommandPalette";
 import Cursor from "@/components/ui/Cursor";
@@ -18,7 +18,7 @@ import "./globals.css";
 
 // Variable font (no fixed weights) — covers 400–900; italic powers the editorial accent words.
 // next/font self-hosts and preloads both families; no request ever goes to Google at runtime.
-const inter = Inter({
+const inter = Inter_Tight({
   variable: "--font-inter",
   subsets: ["latin"],
   style: ["normal", "italic"],
@@ -31,8 +31,7 @@ const jetbrains = JetBrains_Mono({
   display: "swap",
 });
 
-const description =
-  "A senior video editor and content creator cutting brand films, commercials, social reels and AI-driven visuals.";
+const description = `${site.name} is a ${site.role.toLowerCase()} shaping social-first edits with story, rhythm, and detail.`;
 
 /** Derived from `site.name` so editing data/site.ts updates every SEO surface. */
 const pageTitle = `${site.name} — Video Editor & Content Creator`;
@@ -65,7 +64,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0a",
+  themeColor: "#121211",
   colorScheme: "dark light",
 };
 

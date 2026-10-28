@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import SocialLinks from "@/components/ui/SocialLinks";
-import { site } from "@/data/site";
+import { contactEmail, site } from "@/data/site";
 import { CONTAINER, cn } from "@/lib/utils";
 
 export default function Footer() {
@@ -26,22 +26,24 @@ export default function Footer() {
             >
               Let&apos;s create
             </Link>
-            <a
-              href={`mailto:${site.email}`}
-              className="mt-8 inline-block text-2xl font-medium tracking-tight text-muted transition-colors duration-300 hover:text-accent md:text-4xl"
-            >
-              {site.email}
-            </a>
+            {contactEmail && (
+              <a
+                href={`mailto:${contactEmail}`}
+                className="mt-8 inline-block text-2xl font-medium tracking-tight text-muted transition-colors duration-300 hover:text-accent md:text-4xl"
+              >
+                {contactEmail}
+              </a>
+            )}
             <SocialLinks className="mt-12" />
           </div>
         )}
 
         <div className="flex flex-col justify-between gap-3 font-mono text-[10px] uppercase tracking-widest text-muted sm:flex-row">
           <span>
-            © 2026 {site.name} <span className="text-muted/70">— Cairo, EG</span>
+            © 2026 {site.name} <span className="text-muted/70">— {site.location}</span>
           </span>
           {!showCta && <SocialLinks className="hidden lg:flex" compact />}
-          <span>Cairo → Worldwide</span>
+          <span>{site.location.split(",")[0]} → Worldwide</span>
         </div>
       </div>
     </footer>

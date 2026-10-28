@@ -7,7 +7,7 @@ import { CONTAINER, cn } from "@/lib/utils";
 
 export const metadata: Metadata = pageMetadata({
   title: "Reels",
-  description: "Vertical-first edits for Instagram, TikTok and YouTube Shorts.",
+  description: "A short-form video reel gallery by Vijay Charan.",
   path: "/reels",
 });
 
@@ -15,10 +15,10 @@ export default function ReelsPage() {
   return (
     <>
       <PageHeader
-        label="(03) Vertical"
+        label="(05) Social · Motion"
         title="Reels"
-        description="Short-form built for the thumb. Hooks in the first second, pacing that holds, and cuts designed for sound-on and sound-off."
-        meta={`${reels.length} reels — 11M+ views`}
+        description="A selection of short-form edits and motion explorations."
+        meta="Social · Motion"
       />
       <section id="reels" className={cn(CONTAINER, "pb-24 md:pb-40")}>
         <ReelsView reels={reels} />

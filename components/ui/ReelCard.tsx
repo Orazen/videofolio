@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import Placeholder from "@/components/ui/Placeholder";
-import ProjectBadges from "@/components/ui/ProjectBadges";
 import type { Reel } from "@/data/projects";
 import { cn } from "@/lib/utils";
 
@@ -30,7 +29,7 @@ export default function ReelCard({ reel, index, href = "/reels", onOpen, natural
           <span className="size-1.5 rounded-full bg-accent-2" />
           Reel {String(index + 1).padStart(2, "0")}
         </span>
-        <span>9:16</span>
+        <span>{reel.aspect.match(/\[(.+)\]/)?.[1].replace("/", ":") ?? "9:16"}</span>
       </div>
       {onOpen && (
         <span
@@ -41,12 +40,10 @@ export default function ReelCard({ reel, index, href = "/reels", onOpen, natural
         </span>
       )}
       <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-bg/80 to-transparent p-4 pt-16 text-left">
-        <ProjectBadges filmed={reel.filmed} directed={reel.directed} edited={reel.edited} className="mb-2" />
-        <h3 className="text-lg font-black uppercase tracking-tight">{reel.title}</h3>
-        <p className="mt-1 flex justify-between font-mono text-[10px] uppercase tracking-widest text-muted">
-          <span>{reel.client}</span>
-          <span>▶ {reel.views} views</span>
+        <p className="mb-2 font-mono text-[9px] uppercase tracking-[0.16em] text-accent">
+          {reel.category} · {reel.duration}
         </p>
+        <h3 className="text-lg font-black uppercase tracking-tight">{reel.title}</h3>
       </div>
     </div>
   );

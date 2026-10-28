@@ -8,8 +8,8 @@ import { SITE_URL } from "@/lib/seo";
  * (offline build) the bundled default font is used instead of failing.
  */
 
-export const ACCENT = "#e7fe55";
-export const BG = "#0a0a0a";
+export const ACCENT = "#37d67a";
+export const BG = "#121211";
 
 type Font = { name: string; data: ArrayBuffer; weight: 900; style: "normal" };
 
@@ -28,8 +28,9 @@ export async function interBlack(text: string): Promise<Font[]> {
   }
 }
 
-/** Square "3" monogram — favicon and apple-touch icon. */
+/** Site initial — favicon and apple-touch icon. */
 export async function monogram(size: number): Promise<ImageResponse> {
+  const initial = site.name.trim().charAt(0).toUpperCase() || "V";
   return new ImageResponse(
     (
       <div
@@ -49,15 +50,17 @@ export async function monogram(size: number): Promise<ImageResponse> {
           letterSpacing: "-0.04em",
         }}
       >
-        3
+        {initial}
       </div>
     ),
-    { width: size, height: size, fonts: await interBlack("3") },
+    { width: size, height: size, fonts: await interBlack(initial) },
   );
 }
 
 /** 1200×630 social card. */
-export async function socialCard({ eyebrow = "Portfolio — Cairo → Worldwide" }: { eyebrow?: string } = {}): Promise<ImageResponse> {
+export async function socialCard({
+  eyebrow = `Portfolio — ${site.location.split(",")[0]} → Worldwide`,
+}: { eyebrow?: string } = {}): Promise<ImageResponse> {
   const host = SITE_URL.replace(/^https?:\/\//, "");
   const text = `${site.name}${site.role}${host}${eyebrow}0123456789→—&`;
   return new ImageResponse(
@@ -70,12 +73,12 @@ export async function socialCard({ eyebrow = "Portfolio — Cairo → Worldwide"
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "64px 72px",
-          background: `radial-gradient(70% 90% at 78% 12%, rgba(231,254,85,0.16) 0%, rgba(231,254,85,0) 60%), ${BG}`,
-          color: "#f5f5f5",
+          background: `radial-gradient(70% 90% at 78% 12%, rgba(55,214,122,0.16) 0%, rgba(55,214,122,0) 60%), ${BG}`,
+          color: "#f2f2ee",
           fontFamily: "Inter",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 22, letterSpacing: "0.2em", textTransform: "uppercase", color: "#8a8a8a" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 22, letterSpacing: "0.2em", textTransform: "uppercase", color: "#a2a29b" }}>
           <div style={{ width: 12, height: 12, borderRadius: 999, background: ACCENT }} />
           {eyebrow}
         </div>
@@ -83,9 +86,9 @@ export async function socialCard({ eyebrow = "Portfolio — Cairo → Worldwide"
           <div style={{ fontSize: 212, fontWeight: 900, lineHeight: 0.9, letterSpacing: "-0.05em" }}>{site.name}</div>
           <div style={{ marginTop: 28, fontSize: 40, fontWeight: 900, color: ACCENT, letterSpacing: "-0.01em" }}>{site.role}</div>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 24, color: "#8a8a8a", letterSpacing: "0.12em", textTransform: "uppercase" }}>
-          <span>Brand films · Commercials · Reels · AI</span>
-          <span style={{ color: "#f5f5f5" }}>{host}</span>
+        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 24, color: "#a2a29b", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+          <span>Social edits · Motion · AI visuals</span>
+          <span style={{ color: "#f2f2ee" }}>{host}</span>
         </div>
       </div>
     ),

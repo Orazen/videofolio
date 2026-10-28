@@ -40,7 +40,7 @@ export function projectCredits(p: Pick<Project, "filmed" | "directed" | "edited"
 export const projects: Project[] = [
   {
     id: "be-happy",
-    accentColor: "#e7fe55",
+    accentColor: "#37d67a",
     orientation: "vertical",
     title: "Be happy",
     category: "sports",
@@ -62,8 +62,7 @@ export const projects: Project[] = [
 export type Reel = {
   id: string;
   title: string;
-  views: string;
-  client: string;
+  category: "social" | "motion";
   /** Tailwind aspect class — varied for the masonry layout on /reels */
   aspect: "aspect-[9/16]" | "aspect-[4/5]" | "aspect-[3/4]";
   duration: string;
@@ -76,14 +75,14 @@ export type Reel = {
 };
 
 export const reels: Reel[] = [
-  { id: "r1", title: "Match Day", views: "2.4M", client: "Stride", aspect: "aspect-[9/16]", duration: "00:14" },
-  { id: "r2", title: "First Bite", views: "1.1M", client: "Ember Kitchen", aspect: "aspect-[4/5]", duration: "00:22" },
-  { id: "r3", title: "Drop 03", views: "860K", client: "Maison Noor", aspect: "aspect-[9/16]", duration: "00:09" },
-  { id: "r4", title: "Zero to 100", views: "3.2M", client: "Velocity", aspect: "aspect-[3/4]", duration: "00:18" },
-  { id: "r5", title: "Room Tour", views: "540K", client: "Horizon", aspect: "aspect-[9/16]", duration: "00:31" },
-  { id: "r6", title: "AI Morph", views: "1.8M", client: "Self", aspect: "aspect-[4/5]", duration: "00:12" },
-  { id: "r7", title: "Pour Over", views: "720K", client: "Bloom Coffee", aspect: "aspect-[9/16]", duration: "00:16" },
-  { id: "r8", title: "Behind the Cut", views: "410K", client: "Self", aspect: "aspect-[3/4]", duration: "00:27" },
+  { id: "r1", title: "Short-form edit 01", category: "social", aspect: "aspect-[9/16]", duration: "00:14" },
+  { id: "r2", title: "Short-form edit 02", category: "social", aspect: "aspect-[4/5]", duration: "00:22" },
+  { id: "r3", title: "Short-form edit 03", category: "social", aspect: "aspect-[9/16]", duration: "00:09" },
+  { id: "r4", title: "Short-form edit 04", category: "social", aspect: "aspect-[3/4]", duration: "00:18" },
+  { id: "r5", title: "Short-form edit 05", category: "social", aspect: "aspect-[9/16]", duration: "00:31" },
+  { id: "r6", title: "AI motion study", category: "motion", aspect: "aspect-[4/5]", duration: "00:12" },
+  { id: "r7", title: "Short-form edit 06", category: "social", aspect: "aspect-[9/16]", duration: "00:16" },
+  { id: "r8", title: "Short-form edit 07", category: "social", aspect: "aspect-[3/4]", duration: "00:27" },
 ];
 
 export const verticalProjects = projects.filter((p) => p.orientation === "vertical");

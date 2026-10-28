@@ -4,26 +4,23 @@
  */
 export const site = {
   name: "Vijay Charan",
-  email: "hello@example.com",
-  location: "Your City",
+  email: "",
+  location: "Cairo, Egypt",
   role: "Video Editor & Content Creator",
 } as const;
+
+/** Never publish the starter template's example address. */
+export const contactEmail = /@example\.(com|net|org)$/i.test(site.email) ? "" : site.email;
 
 /** Replace each href with your real profile URL, or delete the entry. */
 export const socials = [
   { label: "Instagram", href: "https://www.instagram.com/vijaycharan_04/" },
   { label: "Visual Cinema", href: "https://www.instagram.com/visual_cinema.4x/" },
-  { label: "Vimeo", href: "#" },
-  { label: "Behance", href: "#" },
-  { label: "YouTube", href: "#" },
-  { label: "TikTok", href: "#" },
-  { label: "X", href: "#" },
 ] as const;
 
 export const navLinks = [
   { label: "Work", href: "/work" },
   { label: "Reels", href: "/reels" },
-  { label: "AI", href: "/ai" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const;
