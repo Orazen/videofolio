@@ -100,7 +100,7 @@ function Grid({ projects, categories, initial }: WorkGridProps & { initial: Stat
   const pill = (on: boolean) =>
     cn(
       "border px-4 py-2 font-mono text-[10px] uppercase tracking-widest transition-colors duration-300",
-      on ? "border-accent bg-accent text-[#0a0a0a]" : "border-line text-muted hover:border-fg hover:text-fg",
+      on ? "border-accent bg-accent text-bg" : "border-line text-muted hover:border-fg hover:text-fg",
     );
   const control = "h-9 border border-line bg-transparent px-3 font-mono text-[10px] uppercase tracking-widest text-muted outline-none transition-colors hover:border-fg focus:border-accent";
 

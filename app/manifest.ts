@@ -5,12 +5,12 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: `${site.name} — Video Editor`,
     short_name: site.name,
-    description: `${site.role} — brand films, commercials, social reels and AI video.`,
+    description: `${site.role} — social edits, motion and AI visuals.`,
     start_url: "/",
     scope: "/",
     display: "standalone",
-    theme_color: "#0a0a0a",
-    background_color: "#0a0a0a",
+    theme_color: "#121211",
+    background_color: "#121211",
     icons: [
       { src: "/icon", sizes: "32x32", type: "image/png" },
       { src: "/apple-icon", sizes: "180x180", type: "image/png", purpose: "any" },

@@ -21,7 +21,7 @@ export default function SelectedWork() {
       <section id="work" className="border-b border-line py-20 md:py-32">
         <div className={CONTAINER}>
           <SectionHeader
-            index="01"
+            index="03"
             label="Vertical work — 9:16"
             lines={["Vertical", { text: "Work.", italic: true }]}
             aside={
@@ -42,7 +42,7 @@ export default function SelectedWork() {
         <section id="featured" className="border-b border-line bg-bg-soft py-20 md:py-32">
           <div className={cn(CONTAINER)}>
             <SectionHeader
-              index="02"
+              index="04"
               label="Horizontal / Featured — 16:9"
               lines={["Wide", { text: "Screen.", italic: true }]}
               aside={

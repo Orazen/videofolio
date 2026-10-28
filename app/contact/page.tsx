@@ -4,7 +4,7 @@ import ContactForm from "@/components/ui/ContactForm";
 import PageHeader from "@/components/ui/PageHeader";
 import Reveal from "@/components/ui/Reveal";
 import SocialLinks from "@/components/ui/SocialLinks";
-import { site } from "@/data/site";
+import { contactEmail, site } from "@/data/site";
 import { CONTAINER, cn } from "@/lib/utils";
 
 export const metadata: Metadata = pageMetadata({
@@ -20,7 +20,7 @@ export default function ContactPage() {
         label={
           <span className="flex items-center gap-2">
             <span className="size-1.5 rounded-full bg-accent" />
-            Available for new projects — 2026
+            Available for new projects
           </span>
         }
         title={
@@ -34,22 +34,20 @@ export default function ContactPage() {
 
       <section id="contact" className={cn(CONTAINER, "grid grid-cols-12 gap-x-6 gap-y-16 pb-24 md:pb-40")}>
         <Reveal stagger className="col-span-12 flex flex-col gap-12 lg:col-span-4">
-          <div>
-            <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-muted">Email</p>
-            <a
-              href={`mailto:${site.email}`}
-              className="text-2xl font-medium tracking-tight transition-colors duration-300 hover:text-accent md:text-3xl"
-            >
-              {site.email}
-            </a>
-          </div>
+          {contactEmail && (
+            <div>
+              <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-muted">Email</p>
+              <a
+                href={`mailto:${contactEmail}`}
+                className="text-2xl font-medium tracking-tight transition-colors duration-300 hover:text-accent md:text-3xl"
+              >
+                {contactEmail}
+              </a>
+            </div>
+          )}
           <div>
             <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-muted">Based in</p>
-            <p className="text-lg">Cairo, Egypt — working worldwide</p>
-          </div>
-          <div>
-            <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-muted">Response time</p>
-            <p className="text-lg">Within 24 hours</p>
+            <p className="text-lg">{site.location} — working worldwide</p>
           </div>
           <div>
             <p className="mb-4 font-mono text-[10px] uppercase tracking-widest text-muted">Elsewhere</p>
@@ -58,7 +56,14 @@ export default function ContactPage() {
         </Reveal>
 
         <Reveal className="col-span-12 lg:col-span-7 lg:col-start-6">
-          <ContactForm />
+          {contactEmail ? (
+            <ContactForm />
+          ) : (
+            <div className="border-y border-line py-8 text-muted">
+              <p>Contact by Instagram while the email address is being set up.</p>
+              <SocialLinks className="mt-6" />
+            </div>
+          )}
         </Reveal>
       </section>
     </>

@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Placeholder from "@/components/ui/Placeholder";
-import ProjectBadges from "@/components/ui/ProjectBadges";
 import type { Reel } from "@/data/projects";
 import { trackVideoPlay } from "@/lib/analytics";
 import { cn, EASE_OUT } from "@/lib/utils";
@@ -231,10 +230,9 @@ export default function ReelsPlayer({ reels, start, onIndex, onClose }: Props) {
                 )}
 
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-linear-to-t from-black/85 via-black/30 to-transparent p-5 pb-8 pr-20 pt-24">
-                  <ProjectBadges filmed={r.filmed} directed={r.directed} edited={r.edited} className="mb-3" />
                   <p className="text-3xl font-black uppercase leading-none tracking-tight">{r.title}</p>
                   <p className="mt-2 font-mono text-[10px] uppercase tracking-widest text-white/60">
-                    {r.client} · {r.duration} · ▶ {r.views}
+                    {r.category} · {r.duration}
                   </p>
                 </div>
 

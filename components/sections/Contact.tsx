@@ -1,6 +1,6 @@
 import Reveal from "@/components/ui/Reveal";
 import SocialLinks from "@/components/ui/SocialLinks";
-import { site } from "@/data/site";
+import { contactEmail } from "@/data/site";
 import { CONTAINER, cn } from "@/lib/utils";
 
 const HEADLINE = ["Let's", "Create."];
@@ -12,7 +12,7 @@ export default function Contact() {
         <Reveal>
           <p className="mb-10 flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-muted">
             <span className="size-1.5 rounded-full bg-accent" />
-            (07) Available for new projects
+            (06) Available for new projects
           </p>
         </Reveal>
         {/* Letters crystallise in: rise, fade and sharpen from an 8px blur. */}
@@ -33,12 +33,16 @@ export default function Contact() {
           </h2>
         </Reveal>
         <Reveal stagger delay={0.2} className="flex flex-col items-center">
-          <a
-            href={`mailto:${site.email}`}
-            className="mt-12 text-[clamp(1.5rem,4.5vw,4rem)] font-medium tracking-normal transition-[color,letter-spacing] duration-400 ease-out hover:tracking-[0.02em] hover:text-accent"
-          >
-            {site.email}
-          </a>
+          {contactEmail ? (
+            <a
+              href={`mailto:${contactEmail}`}
+              className="mt-12 text-[clamp(1.5rem,4.5vw,4rem)] font-medium tracking-normal transition-[color,letter-spacing] duration-400 ease-out hover:tracking-[0.02em] hover:text-accent"
+            >
+              {contactEmail}
+            </a>
+          ) : (
+            <p className="mt-12 text-base text-muted">For inquiries, connect with me on Instagram.</p>
+          )}
           <SocialLinks className="mt-12 justify-center" />
         </Reveal>
       </div>

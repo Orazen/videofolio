@@ -31,7 +31,7 @@ export function setTheme(theme: Theme): void {
   const animate = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (animate) root.classList.add("theme-switching");
   root.dataset.theme = theme;
-  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "light" ? "#fafafa" : "#0a0a0a");
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "light" ? "#f2f2f0" : "#121211");
   try {
     localStorage.setItem(THEME_KEY, theme);
   } catch {

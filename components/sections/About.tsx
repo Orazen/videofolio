@@ -6,7 +6,7 @@ import { CONTAINER, cn } from "@/lib/utils";
 /** Stats with no value configured are hidden rather than shown as blanks. */
 const stats = allStats.filter((s) => s.value.trim() !== "");
 
-export default function About({ index = "06" }: { index?: string }) {
+export default function About({ index = "01" }: { index?: string }) {
   return (
     <section id="about" className="border-b border-line pt-20 md:pt-32">
       <div className={cn(CONTAINER, "grid grid-cols-12 gap-x-6 gap-y-16 pb-20 md:pb-32")}>
@@ -16,10 +16,8 @@ export default function About({ index = "06" }: { index?: string }) {
               ({index}) About
             </p>
             <h2 className="text-[clamp(3rem,7vw,7rem)] font-black uppercase leading-[0.9] tracking-tight">
-              <span className="block">Behind</span>
-              <span className="block">
-                the <span className="pr-[0.06em] italic text-accent">timeline.</span>
-              </span>
+              <span className="block">Cut with</span>
+              <span className="block pr-[0.06em] italic text-accent">intent.</span>
             </h2>
           </Reveal>
         </div>
@@ -27,22 +25,20 @@ export default function About({ index = "06" }: { index?: string }) {
         <div className="col-span-12 lg:col-span-6 lg:col-start-7">
           <Reveal stagger className="flex max-w-xl flex-col gap-6 text-lg leading-relaxed text-muted">
             <p>
-              I&apos;m a video editor and content creator shaping brand films, commercials
-              and social content.
+              I&apos;m Vijay Charan, a video editor and content creator focused on social-first
+              storytelling and clear, purposeful cuts.
             </p>
             <p>
-              My work moves between fields: sports and automotive, fashion and food, real
-              estate, corporate storytelling and lifestyle. Different worlds, same
-              obsession — rhythm, clarity and the frame that makes people stop scrolling.
+              Every edit starts with the story: finding the opening that earns attention,
+              shaping a pace that holds it, and making each frame feel considered.
             </p>
             <p>
-              I run as a one-man studio. Edit, color, motion, sound and delivery under one
-              roof, which means fewer handoffs, faster turnarounds and a single point of
-              view from first assembly to final export.
+              I work across editing, color, motion and delivery, carrying a consistent point
+              of view from the first assembly through the final export.
             </p>
             <p className="text-fg">
-              Lately I&apos;m directing AI-generated sequences too — treating generative
-              tools like a new camera department, with the same editorial discipline.
+              I also explore AI-assisted visuals as another part of the creative toolkit,
+              guided by the same attention to rhythm and detail.
             </p>
           </Reveal>
 

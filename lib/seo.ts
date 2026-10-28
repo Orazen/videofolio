@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { projectHref, type Project } from "@/data/projects";
-import { site, socials } from "@/data/site";
+import { contactEmail, site, socials } from "@/data/site";
 
 /** Canonical origin. Set NEXT_PUBLIC_SITE_URL per environment; falls back to production. */
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/+$/, "");
@@ -22,8 +22,8 @@ export function personSchema(): Record<string, unknown> {
     name: site.name,
     jobTitle: site.role,
     url: SITE_URL,
-    email: `mailto:${site.email}`,
-    address: { "@type": "PostalAddress", addressLocality: site.location, addressCountry: "EG" },
+    ...(contactEmail ? { email: `mailto:${contactEmail}` } : {}),
+    address: { "@type": "PostalAddress", addressLocality: site.location.split(",")[0].trim(), addressCountry: "EG" },
     sameAs: socials.map((s) => s.href),
   };
 }

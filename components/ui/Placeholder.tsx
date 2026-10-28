@@ -16,16 +16,16 @@ type PlaceholderProps = {
 
 /** A 1×1-ish SVG blur-up in the card's gradient + accent — inline, no fetch. */
 function blurData(accent: string): `data:image/${string}` {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><defs><radialGradient id="g" cx="30%" cy="20%" r="90%"><stop offset="0" stop-color="${accent}" stop-opacity="0.35"/><stop offset="1" stop-color="#0a0a0a"/></radialGradient></defs><rect width="8" height="8" fill="url(#g)"/></svg>`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><defs><radialGradient id="g" cx="30%" cy="20%" r="90%"><stop offset="0" stop-color="${accent}" stop-opacity="0.35"/><stop offset="1" stop-color="#121211"/></radialGradient></defs><rect width="8" height="8" fill="url(#g)"/></svg>`;
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
 }
 
 const GRADIENTS = [
-  "radial-gradient(120% 90% at 20% 10%, #262626 0%, #141414 45%, #0b0b0b 100%)",
-  "radial-gradient(110% 100% at 85% 20%, #232323 0%, #121212 50%, #0a0a0a 100%)",
-  "radial-gradient(120% 120% at 50% 100%, #242424 0%, #131313 45%, #0a0a0a 100%)",
-  "linear-gradient(135deg, #1e1e1e 0%, #111111 55%, #0a0a0a 100%)",
-  "radial-gradient(100% 90% at 10% 90%, #252525 0%, #121212 50%, #0b0b0b 100%)",
+  "radial-gradient(120% 90% at 20% 10%, #292927 0%, #1b1b19 45%, #121211 100%)",
+  "radial-gradient(110% 100% at 85% 20%, #292927 0%, #1b1b19 50%, #121211 100%)",
+  "radial-gradient(120% 120% at 50% 100%, #292927 0%, #1b1b19 45%, #121211 100%)",
+  "linear-gradient(135deg, #252523 0%, #1b1b19 55%, #121211 100%)",
+  "radial-gradient(100% 90% at 10% 90%, #252523 0%, #1b1b19 50%, #121211 100%)",
 ];
 
 /**

@@ -89,7 +89,7 @@ export default function PwaManager() {
           <button
             type="button"
             onClick={() => void install()}
-            className="bg-accent px-3 py-1.5 font-mono text-[10px] font-bold uppercase tracking-widest text-[#0a0a0a]"
+            className="bg-accent px-3 py-1.5 font-mono text-[10px] font-bold uppercase tracking-widest text-bg"
           >
             Install app
           </button>
