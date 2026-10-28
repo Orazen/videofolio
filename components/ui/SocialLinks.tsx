@@ -16,7 +16,7 @@ export default function SocialLinks({
         className,
       )}
     >
-      {socials.filter((s) => s.href !== "#").map((s) => (
+      {socials.map((s) => (
         <li key={s.label}>
           <a
             href={s.href}

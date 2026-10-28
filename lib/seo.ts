@@ -24,7 +24,7 @@ export function personSchema(): Record<string, unknown> {
     url: SITE_URL,
     ...(contactEmail ? { email: `mailto:${contactEmail}` } : {}),
     address: { "@type": "PostalAddress", addressLocality: site.location.split(",")[0].trim(), addressCountry: "EG" },
-    sameAs: socials.filter((s) => s.href !== "#").map((s) => s.href),
+    sameAs: socials.map((s) => s.href),
   };
 }
 
