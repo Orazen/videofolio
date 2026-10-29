@@ -41,7 +41,7 @@ export default function Contact() {
               {contactEmail}
             </a>
           ) : (
-            <p className="mt-12 text-base text-muted">For inquiries, connect with me on Instagram.</p>
+            <p className="mt-12 text-base text-muted">For project inquiries, message me on Visual Cinema.</p>
           )}
           <SocialLinks className="mt-12 justify-center" />
         </Reveal>

@@ -25,12 +25,16 @@ export default function About({ index = "01" }: { index?: string }) {
         <div className="col-span-12 lg:col-span-6 lg:col-start-7">
           <Reveal stagger className="flex max-w-xl flex-col gap-6 text-lg leading-relaxed text-muted">
             <p>
-              I&apos;m Vijay Charan, a video editor and content creator focused on social-first
-              storytelling and clear, purposeful cuts.
+              I&apos;m Vijay Charan, a video editor and content creator sharing talking-head edits
+              and travel reels through Visual Cinema.
             </p>
             <p>
               Every edit starts with the story: finding the opening that earns attention,
               shaping a pace that holds it, and making each frame feel considered.
+            </p>
+            <p>
+              Travel videos give me a chance to do more than show a place. I want the edit to
+              carry the pace and feeling of being there.
             </p>
             <p>
               I work across editing, color, motion and delivery, carrying a consistent point

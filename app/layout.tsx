@@ -31,7 +31,7 @@ const jetbrains = JetBrains_Mono({
   display: "swap",
 });
 
-const description = `${site.name} is a ${site.role.toLowerCase()} shaping social-first edits with story, rhythm, and detail.`;
+const description = `${site.name} is a ${site.role.toLowerCase()} creating short-form edits and travel stories with a clear point of view.`;
 
 /** Derived from `site.name` so editing data/site.ts updates every SEO surface. */
 const pageTitle = `${site.name} — Video Editor & Content Creator`;

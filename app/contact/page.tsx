@@ -9,7 +9,7 @@ import { CONTAINER, cn } from "@/lib/utils";
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact",
-  description: "Start a project — brand films, commercials, social and AI video.",
+  description: "Contact Vijay Charan about short-form video editing and travel content.",
   path: "/contact",
 });
 
@@ -60,7 +60,7 @@ export default function ContactPage() {
             <ContactForm />
           ) : (
             <div className="border-y border-line py-8 text-muted">
-              <p>Contact by Instagram while the email address is being set up.</p>
+              <p>For project inquiries, message me through Visual Cinema on Instagram.</p>
               <SocialLinks className="mt-6" />
             </div>
           )}
