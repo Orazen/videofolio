@@ -24,7 +24,7 @@ export default function Hero() {
         </Reveal>
         <Reveal delay={0.12} className="mx-auto mt-10 max-w-xl">
           <p className="text-base leading-relaxed text-muted md:text-lg">
-            Social-first edits for brands and creators, shaped around story, rhythm, and detail.
+            Short-form edits and travel stories, shaped around clear storytelling, thoughtful pacing, and the feeling behind each frame.
           </p>
         </Reveal>
         <Reveal delay={0.2} className="mt-9 flex flex-wrap items-center justify-center gap-3">

@@ -14,8 +14,8 @@ export const contactEmail = /@example\.(com|net|org)$/i.test(site.email) ? "" : 
 
 /** Replace each href with your real profile URL, or delete the entry. */
 export const socials = [
-  { label: "Instagram", href: "https://www.instagram.com/vijaycharan_04/" },
-  { label: "Visual Cinema", href: "https://www.instagram.com/visual_cinema.4x/" },
+  { label: "Visual Cinema · @visual_cinema.4x", href: "https://www.instagram.com/visual_cinema.4x/" },
+  { label: "Vijay Charan · @vijaycharan_04", href: "https://www.instagram.com/vijaycharan_04/" },
 ] as const;
 
 export const navLinks = [
