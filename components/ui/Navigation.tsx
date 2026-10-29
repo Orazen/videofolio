@@ -3,7 +3,7 @@
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import Clock from "@/components/ui/Clock";
 import NavTools from "@/components/ui/NavTools";
 import { navLinks, site } from "@/data/site";
@@ -54,6 +54,18 @@ export default function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 200, damping: 40, restDelta: 0.001 });
+
+  useEffect(() => {
+    if (pathname !== "/" || window.location.hash !== "#instagram") return;
+    document.getElementById("instagram")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [pathname]);
+
+  const onNavigationClick = (label: string) => {
+    setMenuOpen(false);
+    if (label === "Instagram" && pathname === "/") {
+      document.getElementById("instagram")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
@@ -111,6 +123,7 @@ export default function Navigation() {
                   )}
                   <Link
                     href={href}
+                    onClick={() => onNavigationClick(link.label)}
                     className={cn(
                       "font-mono text-[11px] uppercase tracking-widest transition-colors duration-300",
                       active ? "text-fg" : "text-muted hover:text-fg",
@@ -177,7 +190,7 @@ export default function Navigation() {
                   >
                     <Link
                       href={href}
-                      onClick={() => setMenuOpen(false)}
+                      onClick={() => onNavigationClick(link.label)}
                       className={cn(
                         "text-5xl font-black uppercase tracking-tight",
                         isActive(link.href) ? "text-accent" : "text-fg",

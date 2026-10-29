@@ -56,7 +56,7 @@ export default function InstagramShowcase() {
   };
 
   return (
-    <section id="instagram" className="border-b border-line py-20 md:py-32">
+    <section id="instagram" className="scroll-mt-20 border-b border-line py-20 md:py-32">
       <div className={CONTAINER}>
         <SectionHeader
           index="06"
