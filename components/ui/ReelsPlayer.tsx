@@ -105,8 +105,8 @@ export default function ReelsPlayer({ reels, start, onIndex, onClose }: Props) {
   // Placeholder slides "play" on a timer so progress + auto-advance still work.
   const reel = reels[index];
   useEffect(() => {
-    if (!reel || reel.videoUrl || paused) return;
-    const total = seconds(reel.duration) * 1000;
+    if (!reel || reel.videoUrl || reel.driveId || paused) return;
+    const total = seconds(reel.duration ?? "00:15") * 1000;
     let last = performance.now();
     let frame = 0;
     const step = (t: number) => {
@@ -133,10 +133,10 @@ export default function ReelsPlayer({ reels, start, onIndex, onClose }: Props) {
       } else if (["arrowup", "arrowleft", "k"].includes(k)) {
         e.preventDefault();
         go(index - 1);
-      } else if (k === " ") {
+      } else if (k === " " && !reels[index]?.driveId) {
         e.preventDefault();
         setPaused((p) => !p);
-      } else if (k === "m") {
+      } else if (k === "m" && !reels[index]?.driveId) {
         setMuted((m) => !m);
       } else if (k === "escape") {
         onClose();
@@ -144,7 +144,7 @@ export default function ReelsPlayer({ reels, start, onIndex, onClose }: Props) {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [go, index, onClose]);
+  }, [go, index, onClose, reels]);
 
   const share = async (r: Reel) => {
     const url = new URL(window.location.href);
@@ -175,21 +175,29 @@ export default function ReelsPlayer({ reels, start, onIndex, onClose }: Props) {
       className="fixed inset-0 z-[80] bg-black text-white"
     >
       {/* Story-style progress: done / current / upcoming */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex gap-1 px-3 pt-3 md:mx-auto md:max-w-[calc(100svh*9/16)]">
-        {reels.map((r, i) => (
-          <span key={r.id} className="h-0.5 flex-1 overflow-hidden rounded-full bg-white/20">
-            <span
-              className="block h-full origin-left bg-white"
-              style={{ transform: `scaleX(${i < index ? 1 : i === index ? progress : 0})` }}
-            />
-          </span>
-        ))}
-      </div>
+      {!reel?.driveId && (
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex gap-1 px-3 pt-3 md:mx-auto md:max-w-[calc(100svh*9/16)]">
+          {reels.map((r, i) => (
+            <span key={r.id} className="h-0.5 flex-1 overflow-hidden rounded-full bg-white/20">
+              <span
+                className="block h-full origin-left bg-white"
+                style={{ transform: `scaleX(${i < index ? 1 : i === index ? progress : 0})` }}
+              />
+            </span>
+          ))}
+        </div>
+      )}
 
-      <div className="absolute inset-x-0 top-6 z-20 flex items-center justify-between px-4 font-mono text-[10px] uppercase tracking-widest text-white/70">
-        <span>
-          {String(index + 1).padStart(2, "0")} / {String(reels.length).padStart(2, "0")}
+      <div className="absolute inset-x-0 top-6 z-20 flex items-center justify-between gap-3 px-4 font-mono text-[10px] uppercase tracking-widest text-white/70">
+        <button type="button" aria-label="Previous video" onClick={() => go(index - 1)} className="shrink-0 rounded-full bg-black/40 px-3 py-2 backdrop-blur hover:bg-white/15">
+          ← Prev
+        </button>
+        <span className="min-w-0 flex-1 truncate text-center">
+          {String(index + 1).padStart(2, "0")} / {String(reels.length).padStart(2, "0")} · {reel?.title}
         </span>
+        <button type="button" aria-label="Next video" onClick={() => go(index + 1)} className="shrink-0 rounded-full bg-black/40 px-3 py-2 backdrop-blur hover:bg-white/15">
+          Next →
+        </button>
         <button type="button" onClick={onClose} className="flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 backdrop-blur hover:bg-white/20">
           Grid <span aria-hidden className="text-base leading-none">×</span>
         </button>
@@ -201,10 +209,32 @@ export default function ReelsPlayer({ reels, start, onIndex, onClose }: Props) {
           return (
             <section key={r.id} data-index={i} aria-label={r.title} className="relative flex h-full snap-start snap-always items-center justify-center">
               <div
-                className="relative h-full w-full overflow-hidden md:h-[calc(100svh-2rem)] md:w-auto md:rounded-xl md:aspect-[9/16]"
-                onClick={() => setPaused((p) => !p)}
+                className={cn(
+                  "relative overflow-hidden bg-black",
+                  r.aspect === "aspect-video"
+                    ? "aspect-video h-[min(calc(100svh-2rem),calc((100vw-2rem)*9/16))] w-[min(calc(100vw-2rem),calc((100svh-2rem)*16/9))]"
+                    : r.aspect === "aspect-square"
+                      ? "aspect-square h-[min(calc(100svh-2rem),calc(100vw-2rem))] w-[min(calc(100vw-2rem),calc(100svh-2rem))]"
+                      : "aspect-[9/16] h-[min(calc(100svh-2rem),calc((100vw-2rem)*16/9))] w-[min(calc(100vw-2rem),calc((100svh-2rem)*9/16))]",
+                  "rounded-xl",
+                )}
+                onClick={r.driveId ? undefined : () => setPaused((p) => !p)}
               >
-                {r.videoUrl ? (
+                {r.driveId ? (
+                  i === index ? (
+                    <iframe
+                      src={`https://drive.google.com/file/d/${r.driveId}/preview`}
+                      title={r.title}
+                      allow="autoplay; fullscreen"
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      className="absolute inset-0 size-full border-0"
+                    />
+                  ) : (
+                    <Placeholder title={r.title} seed={i + 2} size="lg" image={r.poster} />
+                  )
+                ) : r.videoUrl ? (
                   <video
                     ref={(el) => {
                       videos.current[i] = el;
@@ -223,21 +253,23 @@ export default function ReelsPlayer({ reels, start, onIndex, onClose }: Props) {
                   <Placeholder title={r.title} seed={i + 2} size="lg" />
                 )}
 
-                {paused && i === index && (
+                {paused && i === index && !r.driveId && (
                   <span aria-hidden className="absolute inset-0 flex items-center justify-center">
                     <span className="flex size-16 items-center justify-center rounded-full bg-black/40 text-lg backdrop-blur">▶</span>
                   </span>
                 )}
 
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-linear-to-t from-black/85 via-black/30 to-transparent p-5 pb-8 pr-20 pt-24">
-                  <p className="text-3xl font-black uppercase leading-none tracking-tight">{r.title}</p>
-                  <p className="mt-2 font-mono text-[10px] uppercase tracking-widest text-white/60">
-                    {r.category} · {r.duration}
-                  </p>
-                </div>
+                {!r.driveId && (
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-linear-to-t from-black/85 via-black/30 to-transparent p-5 pb-8 pr-20 pt-24">
+                    <p className="text-3xl font-black uppercase leading-none tracking-tight">{r.title}</p>
+                    <p className="mt-2 font-mono text-[10px] uppercase tracking-widest text-white/60">
+                      {r.category.replace("-", " ")}{r.duration ? ` · ${r.duration}` : ""}
+                    </p>
+                  </div>
+                )}
 
                 {/* Action rail */}
-                <div className="absolute bottom-8 right-3 flex flex-col items-center gap-5" onClick={(e) => e.stopPropagation()}>
+                {!r.driveId && <div className="absolute bottom-8 right-3 flex flex-col items-center gap-5" onClick={(e) => e.stopPropagation()}>
                   <button
                     type="button"
                     aria-pressed={isLiked}
@@ -265,16 +297,18 @@ export default function ReelsPlayer({ reels, start, onIndex, onClose }: Props) {
                       <span className="font-mono text-[9px] uppercase tracking-widest">{muted ? "Muted" : "Sound"}</span>
                     </button>
                   )}
-                </div>
+                </div>}
               </div>
             </section>
           );
         })}
       </div>
 
-      <p className="pointer-events-none absolute bottom-3 left-1/2 z-20 hidden -translate-x-1/2 font-mono text-[9px] uppercase tracking-widest text-white/40 md:block">
-        ↑ ↓ navigate · space pause · m mute · esc grid
-      </p>
+      {!reel?.driveId && (
+        <p className="pointer-events-none absolute bottom-3 left-1/2 z-20 hidden -translate-x-1/2 font-mono text-[9px] uppercase tracking-widest text-white/40 md:block">
+          ↑ ↓ navigate · space pause · m mute · esc grid
+        </p>
+      )}
     </motion.div>
   );
 }

@@ -62,28 +62,69 @@ export const projects: Project[] = [
 export type Reel = {
   id: string;
   title: string;
-  category: "social" | "motion";
+  category: "talking-head" | "travel";
   /** Tailwind aspect class — varied for the masonry layout on /reels */
-  aspect: "aspect-[9/16]" | "aspect-[4/5]" | "aspect-[3/4]";
-  duration: string;
+  aspect: "aspect-[9/16]" | "aspect-[4/5]" | "aspect-[3/4]" | "aspect-square" | "aspect-video";
+  duration?: string;
   /** Optional footage for the /reels player; a placeholder plays when empty. */
   videoUrl?: string;
+  /** Google Drive ID for videos played in Drive's embedded player. */
+  driveId?: string;
   poster?: string;
   filmed?: boolean;
   directed?: boolean;
   edited?: boolean;
 };
 
-export const reels: Reel[] = [
-  { id: "r1", title: "Short-form edit 01", category: "social", aspect: "aspect-[9/16]", duration: "00:14" },
-  { id: "r2", title: "Short-form edit 02", category: "social", aspect: "aspect-[4/5]", duration: "00:22" },
-  { id: "r3", title: "Short-form edit 03", category: "social", aspect: "aspect-[9/16]", duration: "00:09" },
-  { id: "r4", title: "Short-form edit 04", category: "social", aspect: "aspect-[3/4]", duration: "00:18" },
-  { id: "r5", title: "Short-form edit 05", category: "social", aspect: "aspect-[9/16]", duration: "00:31" },
-  { id: "r6", title: "AI motion study", category: "motion", aspect: "aspect-[4/5]", duration: "00:12" },
-  { id: "r7", title: "Short-form edit 06", category: "social", aspect: "aspect-[9/16]", duration: "00:16" },
-  { id: "r8", title: "Short-form edit 07", category: "social", aspect: "aspect-[3/4]", duration: "00:27" },
+const driveReel = (
+  category: Reel["category"],
+  number: number,
+  driveId: string,
+  duration: string | undefined,
+  aspect: Reel["aspect"],
+): Reel => ({
+  id: `${category}-${String(number).padStart(2, "0")}`,
+  title: `${category === "talking-head" ? "Talking Head" : "Travel"} ${String(number).padStart(2, "0")}`,
+  category,
+  aspect,
+  ...(duration ? { duration } : {}),
+  driveId,
+  poster: `https://lh3.googleusercontent.com/d/${driveId}=w640`,
+});
+
+const talkingHeadReels = [
+  driveReel("talking-head", 1, "1zbW_p9UwFdrV_ttRlgFL5XeKfo9ihT6A", "00:29", "aspect-[9/16]"),
+  driveReel("talking-head", 2, "1czytlSAab3x2CYk4ztynMzDAyugX5a1c", "00:26", "aspect-[9/16]"),
+  driveReel("talking-head", 3, "13ZSP5Q9GCmNbu4N78kR39Lg5jVAQgQCW", "00:35", "aspect-[9/16]"),
+  driveReel("talking-head", 4, "1ecqiSkMMvlvG5BlK9kR4KTn5FxTxX853", "00:20", "aspect-[9/16]"),
+  driveReel("talking-head", 5, "1Z_n9oRTEWZXKkdYWftQL_OXUWCtce5Q_", "00:11", "aspect-[9/16]"),
+  driveReel("talking-head", 6, "1MzLiqQTWfFiUGILCE2oB6X9cRpzw1hGS", "00:17", "aspect-[9/16]"),
+  driveReel("talking-head", 7, "1H4_yQ_GJaLbdN5YrCq2yrbwu37IVp90Y", "00:38", "aspect-[9/16]"),
+  driveReel("talking-head", 8, "1n2JDs4iGvExYOSyN1l9GF_GZniePHPr-", undefined, "aspect-[9/16]"),
+  driveReel("talking-head", 9, "1R10nn8G3irCrK664QIrIEwsmW-e9c0Uw", "00:19", "aspect-[9/16]"),
+  driveReel("talking-head", 10, "1OJZYu2HAPYHYeL4NcHJv3qHQ1jbtAiSK", undefined, "aspect-[9/16]"),
+  driveReel("talking-head", 11, "1hDC7hfms-cma8RuSMYMp2jAzPwD4edpL", undefined, "aspect-[9/16]"),
+  driveReel("talking-head", 12, "1sX5u2aGnKGruOOBXYmGBKpGQi0MBGPvL", undefined, "aspect-[9/16]"),
+  driveReel("talking-head", 13, "1A6DFDC_oR1scYTZQtVlqVPUdZIphyHKt", "00:34", "aspect-[9/16]"),
+  driveReel("talking-head", 14, "1NmfMNvcW3hKgzXL5idkCza_gxztB2xSQ", "00:22", "aspect-[9/16]"),
 ];
+
+const travelReels = [
+  driveReel("travel", 1, "1LUKij-JXvcjTvf8dof9sRx-tuJIRHWib", "00:28", "aspect-video"),
+  driveReel("travel", 2, "1kWLrJh6ojpcs48uNXZCFw-ou2G8coEuf", "00:29", "aspect-square"),
+  driveReel("travel", 3, "15d9AkMIm1tzGMmFQrvpTdCIA_Xej3kKi", "00:27", "aspect-video"),
+  driveReel("travel", 4, "1lXo7IvsawaNkCvssV7ai4Yq4pG-QkIHi", "00:13", "aspect-[9/16]"),
+  driveReel("travel", 5, "1qGzvtlE3ceNllCljmrcTdu8XQpJALIHJ", "00:11", "aspect-video"),
+  driveReel("travel", 6, "16oDiIlm3xTvJt2kbKfNGjs5mp7655gil", "00:21", "aspect-video"),
+  driveReel("travel", 7, "1u_E2vc98lVsnT9OTgqMhXlxFnGjTm0ld", "00:17", "aspect-[9/16]"),
+  driveReel("travel", 8, "1Z-Lsg7VP8XbMsB2VG8mrwWor5FXODL1f", "00:19", "aspect-[9/16]"),
+  driveReel("travel", 9, "1PoGkupe61NgDcgPyF0-TSya4DbtcIkYW", "00:14", "aspect-[9/16]"),
+  driveReel("travel", 10, "10y6_dNh9le5kmZ5HO92pGQQpLWOHdkDX", "00:13", "aspect-[9/16]"),
+  driveReel("travel", 11, "1mdi9iorv43dZpZOVlDsjgRi8xNStI9Lj", undefined, "aspect-video"),
+  driveReel("travel", 12, "1vyvdCHJsoYiJO2TklMFgMh_OaPVKkB7Z", "00:07", "aspect-[9/16]"),
+];
+
+export const reels: Reel[] = [...talkingHeadReels, ...travelReels];
 
 export const verticalProjects = projects.filter((p) => p.orientation === "vertical");
 export const horizontalProjects = projects.filter((p) => p.orientation === "horizontal");

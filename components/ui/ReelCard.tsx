@@ -16,6 +16,12 @@ type ReelCardProps = {
 };
 
 export default function ReelCard({ reel, index, href = "/reels", onOpen, natural = false, className }: ReelCardProps) {
+  const aspectLabel =
+    reel.aspect === "aspect-square"
+      ? "1:1"
+      : reel.aspect === "aspect-video"
+        ? "16:9"
+        : reel.aspect.match(/\[(.+)\]/)?.[1].replace("/", ":") ?? "9:16";
   const body: ReactNode = (
     <div
       className={cn(
@@ -29,7 +35,7 @@ export default function ReelCard({ reel, index, href = "/reels", onOpen, natural
           <span className="size-1.5 rounded-full bg-accent-2" />
           Reel {String(index + 1).padStart(2, "0")}
         </span>
-        <span>{reel.aspect.match(/\[(.+)\]/)?.[1].replace("/", ":") ?? "9:16"}</span>
+        <span>{aspectLabel}</span>
       </div>
       {onOpen && (
         <span
@@ -41,7 +47,7 @@ export default function ReelCard({ reel, index, href = "/reels", onOpen, natural
       )}
       <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-bg/80 to-transparent p-4 pt-16 text-left">
         <p className="mb-2 font-mono text-[9px] uppercase tracking-[0.16em] text-accent">
-          {reel.category} · {reel.duration}
+          {reel.category.replace("-", " ")}{reel.duration ? ` · ${reel.duration}` : ""}
         </p>
         <h3 className="text-lg font-black uppercase tracking-tight">{reel.title}</h3>
       </div>
