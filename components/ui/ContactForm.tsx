@@ -19,6 +19,14 @@ type Toast = { kind: "success" | "error"; text: string };
 
 const EMPTY: FormState = { name: "", email: "", projectType: PROJECT_TYPES[0], message: "" };
 
+function buildDirectEmailHref(form: FormState) {
+  if (!contactEmail) return undefined;
+
+  const subject = `Project enquiry${form.projectType ? ` — ${form.projectType}` : ""}`;
+  const body = `Name: ${form.name}\nEmail: ${form.email}\nProject type: ${form.projectType || "—"}\n\n${form.message}`;
+  return `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
 const fieldClass =
   "w-full border-b border-line bg-transparent py-4 text-lg outline-none transition-colors duration-300 placeholder:text-muted/60 focus:border-accent";
 const labelClass = "font-mono text-[10px] uppercase tracking-widest text-muted";
@@ -28,6 +36,7 @@ export default function ContactForm() {
   const [sending, setSending] = useState(false);
   const [toast, setToast] = useState<Toast | null>(null);
   const [honeypot, setHoneypot] = useState("");
+  const directEmailHref = buildDirectEmailHref(form);
 
   const update = <K extends keyof FormState>(key: K, value: FormState[K]) => setForm((f) => ({ ...f, [key]: value }));
 
@@ -50,11 +59,21 @@ export default function ContactForm() {
         body: JSON.stringify({ ...form, company: honeypot }),
       });
       const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+      if (res.status >= 500 && directEmailHref) {
+        window.location.assign(directEmailHref);
+        setToast({ kind: "error", text: "Email delivery is unavailable. Your message is ready in your email app; choose Send to deliver it." });
+        return;
+      }
       if (!res.ok || !data.ok) throw new Error(data.error || `Something went wrong (${res.status})`);
       trackCTA("contact_submit");
       setForm(EMPTY);
       setToast({ kind: "success", text: "Message sent — I'll be in touch as soon as I can." });
     } catch (err) {
+      if (err instanceof TypeError && directEmailHref) {
+        window.location.assign(directEmailHref);
+        setToast({ kind: "error", text: "The form could not reach email delivery. Your message is ready in your email app; choose Send to deliver it." });
+        return;
+      }
       const reason = err instanceof Error ? err.message : "Something went wrong";
       setToast({ kind: "error", text: contactEmail ? `${reason}. You can also email ${contactEmail}.` : `${reason}. Please use the social links to reach out.` });
     } finally {
@@ -148,6 +167,15 @@ export default function ContactForm() {
           {sending && <span aria-hidden className="size-3 animate-spin rounded-full border border-current border-t-transparent" />}
           {sending ? "Sending…" : "Send message →"}
         </button>
+        {directEmailHref && (
+          <a
+            href={directEmailHref}
+            aria-label={`Open a prefilled email to ${contactEmail}`}
+            className="font-mono text-[10px] uppercase tracking-widest text-muted transition-colors hover:text-accent"
+          >
+            Email this enquiry directly ↗
+          </a>
+        )}
       </div>
 
       {/* Toast */}
