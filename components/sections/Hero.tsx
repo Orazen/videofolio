@@ -29,7 +29,7 @@ export default function Hero() {
         </Reveal>
         <Reveal delay={0.2} className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <Link
-            href="#work"
+            href="/work"
             data-track="cta"
             data-track-id="hero_view_work"
             className="rounded-full bg-accent px-6 py-3 font-mono text-[10px] font-bold uppercase tracking-widest text-bg transition-transform hover:-translate-y-0.5"

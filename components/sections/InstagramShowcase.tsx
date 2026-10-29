@@ -59,7 +59,7 @@ export default function InstagramShowcase() {
     <section id="instagram" className="scroll-mt-20 border-b border-line py-20 md:py-32">
       <div className={CONTAINER}>
         <SectionHeader
-          index="06"
+          index="03"
           label="Instagram · Public Reels"
           lines={["Stories in", { text: "Motion.", italic: true }]}
           aside={

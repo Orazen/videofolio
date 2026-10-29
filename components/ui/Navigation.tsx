@@ -40,7 +40,7 @@ function subscribeScrolling(onChange: () => void) {
 const getScrolling = () => scrolling;
 
 const homeAnchors: Record<(typeof navLinks)[number]["href"], string> = {
-  "/work": "#work",
+  "/work": "/work",
   "/reels": "#reels",
   "/#instagram": "#instagram",
   "/about": "#about",
