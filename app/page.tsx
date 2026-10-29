@@ -28,7 +28,7 @@ export default function Home() {
       <SelectedWork />
       <section id="reels" className="border-b border-line bg-bg-soft py-20 md:py-32">
         <div className={CONTAINER}>
-          <SectionHeader index="05" label="Short-form / 9:16" lines={["Selected", { text: "Reels.", italic: true }]} />
+          <SectionHeader index="05" label="Talking Head · Travel" lines={["Video", { text: "Collection.", italic: true }]} />
           <ReelsView reels={reels} showViewToggle={false} />
         </div>
       </section>

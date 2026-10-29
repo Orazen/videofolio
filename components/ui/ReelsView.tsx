@@ -23,6 +23,11 @@ function setParams(entries: Record<string, string | null>) {
 function View({ reels, showViewToggle = true, initialPlayer, initialIndex }: Props & { initialPlayer: boolean; initialIndex: number }) {
   const [player, setPlayer] = useState<number | null>(initialPlayer ? initialIndex : null);
   const [category, setCategory] = useState<"all" | Reel["category"]>("all");
+  const filters: { value: "all" | Reel["category"]; label: string }[] = [
+    { value: "all", label: "All" },
+    { value: "talking-head", label: "Talking Head" },
+    { value: "travel", label: "Travel" },
+  ];
   const visibleReels = useMemo(
     () => (category === "all" ? reels : reels.filter((reel) => reel.category === category)),
     [category, reels],
@@ -50,7 +55,7 @@ function View({ reels, showViewToggle = true, initialPlayer, initialIndex }: Pro
       <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-wrap items-center gap-2">
           <div role="group" aria-label="Filter reels" className="flex flex-wrap gap-1 rounded-full border border-line p-1">
-            {(["all", "social", "motion"] as const).map((value) => (
+            {filters.map(({ value, label }) => (
               <button
                 key={value}
                 type="button"
@@ -58,7 +63,7 @@ function View({ reels, showViewToggle = true, initialPlayer, initialIndex }: Pro
                 onClick={() => setCategory(value)}
                 className={tab(category === value)}
               >
-                {value === "all" ? "All" : value === "social" ? "Social" : "Motion"}
+                {label}
               </button>
             ))}
           </div>

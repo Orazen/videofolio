@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
       // Cloudinary — legacy uploads that are still referenced in data/projects.ts
       { protocol: "https", hostname: "res.cloudinary.com" },
+      // Public Google Drive video thumbnails used by the reels gallery
+      { protocol: "https", hostname: "lh3.googleusercontent.com", pathname: "/d/**" },
     ],
   },
 };
