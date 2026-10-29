@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { instagramProfileUrl, instagramReels } from "@/data/instagram";
@@ -10,7 +11,6 @@ export default function InstagramShowcase() {
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [loadedIndices, setLoadedIndices] = useState<Set<number>>(() => new Set([0, 1]));
 
   useEffect(() => {
     const track = trackRef.current;
@@ -29,16 +29,6 @@ export default function InstagramShowcase() {
         })[0];
         const index = Number((current.target as HTMLElement).dataset.reelIndex);
         setActiveIndex(index);
-        setLoadedIndices((previous) => {
-          const next = new Set(previous);
-          for (const entry of visible) {
-            const visibleIndex = Number((entry.target as HTMLElement).dataset.reelIndex);
-            for (const neighbor of [visibleIndex - 1, visibleIndex, visibleIndex + 1]) {
-              if (neighbor >= 0 && neighbor < instagramReels.length) next.add(neighbor);
-            }
-          }
-          return next;
-        });
       },
       { root: track, threshold: [0.45, 0.7] },
     );
@@ -76,7 +66,7 @@ export default function InstagramShowcase() {
 
         <div className="mb-5 flex items-end justify-between gap-4">
           <p className="max-w-md text-sm leading-relaxed text-muted md:text-base">
-            Selected public Reels, embedded from Instagram. Open any post to watch it on the original profile.
+            Selected public Reels from Instagram. Open any thumbnail to watch the original post.
           </p>
           <div className="hidden shrink-0 font-mono text-[10px] uppercase tracking-widest text-muted sm:block" aria-live="polite">
             {String(activeIndex + 1).padStart(2, "0")} <span className="text-accent">/</span> {String(instagramReels.length).padStart(2, "0")}
@@ -102,29 +92,38 @@ export default function InstagramShowcase() {
               aria-label={`Instagram Reel ${index + 1} of ${instagramReels.length}`}
               className="w-[min(82vw,360px)] shrink-0 snap-start"
             >
-              <div className="overflow-hidden border border-line bg-bg-soft">
-                {loadedIndices.has(index) ? (
-                  <iframe
-                    src={`https://www.instagram.com/reel/${shortcode}/embed/`}
-                    title={`Instagram Reel ${index + 1} from Visual Cinema`}
-                    loading="lazy"
-                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                    allowFullScreen
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    className="h-[580px] w-full border-0 bg-bg-soft"
-                  />
-                ) : (
-                  <div className="flex h-[580px] flex-col items-center justify-center gap-4 bg-bg-soft px-6 text-center">
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-accent">
-                      Public Reel · {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <span className="text-4xl font-light text-fg/30">▶</span>
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-muted">
-                      Scroll to load Instagram post
-                    </span>
-                  </div>
-                )}
-              </div>
+              <Link
+                href={`https://www.instagram.com/reel/${shortcode}/`}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Watch Instagram Reel ${index + 1} on Instagram (opens in a new tab)`}
+                className="group relative isolate block aspect-[9/16] overflow-hidden border border-line bg-bg-soft"
+              >
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 scale-110 bg-cover bg-center opacity-45 blur-2xl"
+                  style={{ backgroundImage: `url('/instagram/${shortcode}.jpg')` }}
+                />
+                <Image
+                  src={`/instagram/${shortcode}.jpg`}
+                  alt=""
+                  fill
+                  sizes="(max-width: 640px) 82vw, 360px"
+                  className="z-10 object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 z-20 bg-gradient-to-b from-black/25 via-transparent to-black/55"
+                />
+                <span className="absolute left-4 top-4 z-30 font-mono text-[10px] uppercase tracking-widest text-white/90">
+                  Instagram Reel · {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="pointer-events-none absolute inset-0 z-30 grid place-items-center">
+                  <span className="grid size-14 place-items-center rounded-full border border-white/60 bg-black/35 pl-1 text-xl text-white backdrop-blur-sm transition duration-300 group-hover:scale-110 group-hover:border-accent group-hover:text-accent">
+                    ▶
+                  </span>
+                </span>
+              </Link>
               <Link
                 href={`https://www.instagram.com/reel/${shortcode}/`}
                 target="_blank"
