@@ -3,7 +3,6 @@ import Contact from "@/components/sections/Contact";
 import Experience from "@/components/sections/Experience";
 import Hero from "@/components/sections/Hero";
 import InstagramShowcase from "@/components/sections/InstagramShowcase";
-import SelectedWork from "@/components/sections/SelectedWork";
 import Marquee from "@/components/ui/Marquee";
 import ReelsView from "@/components/ui/ReelsView";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -26,14 +25,13 @@ export default function Home() {
       />
       <About index="01" />
       <Experience index="02" />
-      <SelectedWork />
+      <InstagramShowcase />
       <section id="reels" className="border-b border-line bg-bg-soft py-20 md:py-32">
         <div className={CONTAINER}>
-          <SectionHeader index="05" label="Talking Head · Travel" lines={["Video", { text: "Collection.", italic: true }]} />
+          <SectionHeader index="04" label="Talking Head · Travel" lines={["Video", { text: "Collection.", italic: true }]} />
           <ReelsView reels={reels} showViewToggle={false} />
         </div>
       </section>
-      <InstagramShowcase />
       <Contact />
     </>
   );

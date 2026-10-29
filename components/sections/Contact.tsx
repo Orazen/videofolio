@@ -12,7 +12,7 @@ export default function Contact() {
         <Reveal>
           <p className="mb-10 flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-muted">
             <span className="size-1.5 rounded-full bg-accent" />
-            (07) Available for new projects
+            (05) Available for new projects
           </p>
         </Reveal>
         {/* Letters crystallise in: rise, fade and sharpen from an 8px blur. */}
