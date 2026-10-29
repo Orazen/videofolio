@@ -2,6 +2,7 @@ import About from "@/components/sections/About";
 import Contact from "@/components/sections/Contact";
 import Experience from "@/components/sections/Experience";
 import Hero from "@/components/sections/Hero";
+import InstagramShowcase from "@/components/sections/InstagramShowcase";
 import SelectedWork from "@/components/sections/SelectedWork";
 import Marquee from "@/components/ui/Marquee";
 import ReelsView from "@/components/ui/ReelsView";
@@ -32,6 +33,7 @@ export default function Home() {
           <ReelsView reels={reels} showViewToggle={false} />
         </div>
       </section>
+      <InstagramShowcase />
       <Contact />
     </>
   );

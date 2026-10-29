@@ -25,12 +25,12 @@ export const EASE_OUT: [number, number, number, number] = [0.16, 1, 0.3, 1];
 /** Container classes used by every section. */
 export const CONTAINER = "mx-auto w-full max-w-[1600px] px-6 md:px-12 lg:px-20";
 
-export function formatCairoTime(date: Date): string {
+export function formatIndiaTime(date: Date): string {
   return new Intl.DateTimeFormat("en-GB", {
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
     hour12: false,
-    timeZone: "Africa/Cairo",
+    timeZone: "Asia/Kolkata",
   }).format(date);
 }

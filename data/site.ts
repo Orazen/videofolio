@@ -5,7 +5,7 @@
 export const site = {
   name: "Vijay Charan",
   email: "",
-  location: "Cairo, Egypt",
+  location: "India",
   role: "Video Editor & Content Creator",
 } as const;
 
@@ -21,6 +21,7 @@ export const socials = [
 export const navLinks = [
   { label: "Work", href: "/work" },
   { label: "Reels", href: "/reels" },
+  { label: "Instagram", href: "/#instagram" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const;
