@@ -4,7 +4,7 @@
  */
 export const site = {
   name: "Vijay Charan",
-  email: "",
+  email: "vijaycharan.04x@gmail.com",
   location: "India",
   role: "Video Editor & Content Creator",
 } as const;
